@@ -34,7 +34,7 @@ public class AppointmentQueryController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @GetMapping("/appointment/{appointmentId}")
+    @GetMapping("appointment/{appointmentId}")
     @ApiOperation(value="Obtener citas por Id", response = List.class)
     public ResponseEntity<AppointmentView> getAppointmentsById(@PathVariable("appointmentId") String appointmentId){
         try{
@@ -58,7 +58,7 @@ public class AppointmentQueryController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @GetMapping("date/{appointmentId}")
+/*    @GetMapping("/{appointmentId}")
     @ApiOperation(value = "Conocer la fecha de la cita mediante la fecha por Id de la cita", response = List.class)
     public ResponseEntity<AppointmentView> getDateByAppointmentId(@PathVariable("appointmentId")String appointmentId) {
         try {
@@ -69,5 +69,5 @@ public class AppointmentQueryController {
         } catch( Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
+    }*/
 }

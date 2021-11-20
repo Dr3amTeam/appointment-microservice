@@ -45,7 +45,7 @@ public class AppointmentCommandController {
     }
 
     @PutMapping("/{appointmentId}")
-    @ApiOperation(value = "Actualizar valores de la cita o reprogramación de la cita")
+    @ApiOperation(value = "Confirmar la realización de la cita")
     public ResponseEntity<Object> edit(@PathVariable("appointmentId") String appointmentId,
                                        @RequestBody EditAppointmentRequestDto editAppointmentRequestDto){
         try{

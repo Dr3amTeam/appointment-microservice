@@ -75,7 +75,7 @@ public class Appointment {
         this.appointmentId=event.getAppointmentId();
         this.date= event.getDate();
         this.description= event.getDescription();
-        this.status=AppointmentStatus.CREATED;
+        this.status=AppointmentStatus.PENDING;
     }
 
     @EventSourcingHandler

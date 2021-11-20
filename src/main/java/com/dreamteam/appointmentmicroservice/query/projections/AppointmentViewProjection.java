@@ -14,7 +14,6 @@ import java.time.Instant;
 import java.util.Optional;
 
 @Component
-@ProcessingGroup("appointment")
 public class AppointmentViewProjection {
     private final AppointmentViewRepository appointmentViewRepository;
 
@@ -30,7 +29,7 @@ public class AppointmentViewProjection {
             appointmentView.setPaymentId(event.getPaymentId());
             appointmentView.setDate(event.getDate());
             appointmentView.setDescription(event.getDescription());
-            appointmentView.setStatus(AppointmentStatus.UPDATED.toString());
+            appointmentView.setStatus(AppointmentStatus.ACCOMPLISHED.toString());
             appointmentViewRepository.save(appointmentView);
         }
     }
@@ -40,7 +39,7 @@ public class AppointmentViewProjection {
         String paymentId = event.getPaymentId();
         String date = event.getDate();
         String description = event.getDescription();
-        String status = AppointmentStatus.CREATED.toString();
+        String status = AppointmentStatus.PENDING.toString();
 
         AppointmentView appointmentView = new AppointmentView(appointmentId,paymentId,date,description,
                 status,event.getOccurredOn(),timestamp);
