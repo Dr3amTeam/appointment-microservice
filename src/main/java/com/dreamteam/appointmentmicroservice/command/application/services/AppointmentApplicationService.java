@@ -79,8 +79,10 @@ public class AppointmentApplicationService {
             throw new Exception();
         }
         EditAppointmentResponseDto editAppointmentResponseDto = new EditAppointmentResponseDto(
-                editAppointment.getDate().trim(),
-                editAppointment.getDescription().trim()
+                editAppointment.getAppointmentId(),
+                editAppointment.getPaymentId(),
+                editAppointment.getDate(),
+                editAppointment.getDescription()
         );
         return Result.success(editAppointmentResponseDto);
     }

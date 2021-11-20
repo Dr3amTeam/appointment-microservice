@@ -7,5 +7,5 @@ import java.util.Optional;
 
 @Repository
 public interface AppointmentDateRepository extends JpaRepository<AppointmentDate, String> {
-    Optional<AppointmentDate> getDateByAppointmentId(String date);
+    Optional<AppointmentDate> getAppointmentDateByAppointmentId(String date);
 }

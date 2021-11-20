@@ -8,6 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface AppointmentViewRepository extends JpaRepository<AppointmentView,String> {
-    List<AppointmentView> getByAppointmentStatus(String appointmentStatus);
+    List<AppointmentView> getAppointmentViewsByStatus(String status);
     Optional<AppointmentView> getAppointmentViewByAppointmentId(String appointmentId);
 }

@@ -30,8 +30,6 @@ public class EditAppointmentValidator {
         if(appointmentId.isEmpty()){
             notification2.addError("Appointment Id is required");
         }
-        loadAppointmentAggregate(appointmentId);
-
         String paymentId = editAppointmentRequestDto.getPaymentId().trim();
         if (paymentId.isEmpty()){
             notification2.addError("Appointment payment is required");
@@ -45,19 +43,5 @@ public class EditAppointmentValidator {
             notification2.addError("Appointment Description is required");
         }
         return notification2;
-    }
-    private void loadAppointmentAggregate(String employeeId){
-        UnitOfWork unitOfWork = null;
-
-        try{
-            unitOfWork = DefaultUnitOfWork.startAndGet(null);
-            appointmentRepository.load(employeeId);
-            unitOfWork.commit();
-        } catch (AggregateNotFoundException ex){
-            unitOfWork.commit();
-            throw ex;
-        } catch (Exception ex){
-            if(unitOfWork != null) unitOfWork.rollback();
-        }
     }
 }

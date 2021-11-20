@@ -1,5 +1,6 @@
 package com.dreamteam.appointmentmicroservice.query.api;
 
+import com.dreamteam.appointmentmicroservice.config.SwaggerConfig;
 import com.dreamteam.appointmentmicroservice.query.projections.AppointmentView;
 import com.dreamteam.appointmentmicroservice.query.projections.AppointmentViewRepository;
 import io.swagger.annotations.Api;
@@ -16,7 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/appointments")
-@Api(tags="Appointments")
+@Api(tags={SwaggerConfig.APPOINTMENTS})
 public class AppointmentQueryController {
     private final AppointmentViewRepository appointmentViewRepository;
 
@@ -25,7 +26,7 @@ public class AppointmentQueryController {
     }
 
     @GetMapping("")
-    @ApiOperation(value = "Get all appointments",response = List.class)
+    @ApiOperation(value = "Obtener el listado de citas",response = List.class)
     public ResponseEntity<List<AppointmentView>> getAll(){
         try{
             return new ResponseEntity<List<AppointmentView>>(appointmentViewRepository.findAll(), HttpStatus.OK);
@@ -34,7 +35,7 @@ public class AppointmentQueryController {
         }
     }
     @GetMapping("/appointment/{appointmentId}")
-    @ApiOperation(value="Get Payment id", response = List.class)
+    @ApiOperation(value="Obtener citas por Id", response = List.class)
     public ResponseEntity<AppointmentView> getAppointmentsById(@PathVariable("appointmentId") String appointmentId){
         try{
             Optional<AppointmentView> appointmentViewOptional = appointmentViewRepository.findById(appointmentId);
@@ -48,10 +49,10 @@ public class AppointmentQueryController {
         }
     }
     @GetMapping("appointmentStatus/{appointmentStatus}")
-    @ApiOperation(value = "Get payment type", response = List.class)
+    @ApiOperation(value = "Obtener un listado de citas mediante estado de pago", response = List.class)
     public ResponseEntity<List<AppointmentView>> getAllByPaymentStatus(@PathVariable("appointmentStatus")String appointmentStatus) {
         try {
-            List<AppointmentView> appointmentView = appointmentViewRepository.getByAppointmentStatus(appointmentStatus);
+            List<AppointmentView> appointmentView = appointmentViewRepository.getAppointmentViewsByStatus(appointmentStatus);
             return new ResponseEntity<List<AppointmentView>>(appointmentView, HttpStatus.OK);
         } catch( Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

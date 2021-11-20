@@ -1,6 +1,5 @@
 package com.dreamteam.appointmentmicroservice.command.infra;
 
-import com.dreamteam.appointmentmicroservice.command.domain.AppointmentStatus;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,17 +15,14 @@ public class AppointmentDate {
     private String date;
     @NotNull
     private String description;
-    @NotNull
-    private AppointmentStatus status;
 
     public AppointmentDate(){}
 
-    public AppointmentDate(String appointmentId, String paymentId, String date, String description, AppointmentStatus status) {
+    public AppointmentDate(String appointmentId, String paymentId, String date, String description) {
         this.appointmentId = appointmentId;
         this.paymentId = paymentId;
         this.date = date;
         this.description = description;
-        this.status = status;
     }
 
     public String getAppointmentId() {
@@ -61,11 +57,4 @@ public class AppointmentDate {
         this.description = description;
     }
 
-    public AppointmentStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(AppointmentStatus status) {
-        this.status = status;
-    }
 }

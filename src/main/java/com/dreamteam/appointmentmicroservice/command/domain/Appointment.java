@@ -22,6 +22,7 @@ import static org.axonframework.modelling.command.AggregateLifecycle.apply;
 public class Appointment {
     @AggregateIdentifier
     private String appointmentId;
+    private String paymentId;
     private String date;
     private String description;
     private AppointmentStatus status;
@@ -44,7 +45,7 @@ public class Appointment {
     }
 
     @CommandHandler
-    public Appointment(EditAppointment command){
+    public void handle(EditAppointment command){
         Instant now = Instant.now();
         apply(new AppointmentEdited(
                 command.getAppointmentId(),
@@ -80,9 +81,9 @@ public class Appointment {
     @EventSourcingHandler
     public void on(AppointmentEdited event){
         appointmentId=event.getAppointmentId();
+        paymentId = event.getPaymentId();
         date= event.getDate();
         description=event.getDescription();
-        status=AppointmentStatus.UPDATED;
     }
 
     @EventSourcingHandler

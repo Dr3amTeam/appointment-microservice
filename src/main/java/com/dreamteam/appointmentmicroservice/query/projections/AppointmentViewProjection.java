@@ -30,7 +30,7 @@ public class AppointmentViewProjection {
             appointmentView.setPaymentId(event.getPaymentId());
             appointmentView.setDate(event.getDate());
             appointmentView.setDescription(event.getDescription());
-            appointmentView.setUpdateAt(event.getOccurredOn());
+            appointmentView.setStatus(AppointmentStatus.UPDATED.toString());
             appointmentViewRepository.save(appointmentView);
         }
     }
@@ -40,10 +40,10 @@ public class AppointmentViewProjection {
         String paymentId = event.getPaymentId();
         String date = event.getDate();
         String description = event.getDescription();
-        String appointmentStatus = AppointmentStatus.CREATED.toString();
+        String status = AppointmentStatus.CREATED.toString();
 
         AppointmentView appointmentView = new AppointmentView(appointmentId,paymentId,date,description,
-                appointmentStatus,event.getOccurredOn(),timestamp);
+                status,event.getOccurredOn(),timestamp);
         appointmentViewRepository.save(appointmentView);
     }
     @EventHandler
@@ -51,8 +51,7 @@ public class AppointmentViewProjection {
         Optional<AppointmentView> appointmentViewOptional = appointmentViewRepository.findById(event.getAppointmentId());
         if (appointmentViewOptional.isPresent()) {
             AppointmentView appointmentView = appointmentViewOptional.get();
-            String appointmentStatus = AppointmentStatus.FAILED.toString();
-            appointmentView.setAppointmentStatus(appointmentStatus);
+            appointmentView.setStatus(AppointmentStatus.FAILED.toString());
             appointmentView.setUpdateAt(event.getOccurredOn());
             appointmentViewRepository.save(appointmentView);
         }
@@ -63,8 +62,7 @@ public class AppointmentViewProjection {
         Optional<AppointmentView> appointmentViewOptional = appointmentViewRepository.findById(event.getAppointmentId());
         if (appointmentViewOptional.isPresent()) {
             AppointmentView appointmentView = appointmentViewOptional.get();
-            String appointmentStatus = AppointmentStatus.COMPLETED.toString();
-            appointmentView.setAppointmentStatus(appointmentStatus);
+            appointmentView.setStatus(AppointmentStatus.COMPLETED.toString());
             appointmentView.setUpdateAt(event.getOccurredOn());
             appointmentViewRepository.save(appointmentView);
         }
