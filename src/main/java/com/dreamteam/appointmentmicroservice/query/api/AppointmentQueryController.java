@@ -34,7 +34,7 @@ public class AppointmentQueryController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @GetMapping("/appointment/{appointmentId}")
+    @GetMapping("appointment/{appointmentId}")
     @ApiOperation(value="Obtener citas por Id", response = List.class)
     public ResponseEntity<AppointmentView> getAppointmentsById(@PathVariable("appointmentId") String appointmentId){
         try{
@@ -48,14 +48,26 @@ public class AppointmentQueryController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @GetMapping("appointmentStatus/{appointmentStatus}")
+    @GetMapping("status/{status}")
     @ApiOperation(value = "Obtener un listado de citas mediante estado de pago", response = List.class)
-    public ResponseEntity<List<AppointmentView>> getAllByPaymentStatus(@PathVariable("appointmentStatus")String appointmentStatus) {
+    public ResponseEntity<List<AppointmentView>> getAllByPaymentStatus(@PathVariable("status")String status) {
         try {
-            List<AppointmentView> appointmentView = appointmentViewRepository.getAppointmentViewsByStatus(appointmentStatus);
+            List<AppointmentView> appointmentView = appointmentViewRepository.getAppointmentViewsByStatus(status);
             return new ResponseEntity<List<AppointmentView>>(appointmentView, HttpStatus.OK);
         } catch( Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+/*    @GetMapping("/{appointmentId}")
+    @ApiOperation(value = "Conocer la fecha de la cita mediante la fecha por Id de la cita", response = List.class)
+    public ResponseEntity<AppointmentView> getDateByAppointmentId(@PathVariable("appointmentId")String appointmentId) {
+        try {
+            Optional<AppointmentView> appointmentView =
+                    appointmentViewRepository.getAppointmentViewByAppointmentId(appointmentId);
+            AppointmentView response = appointmentView.get();
+            return new ResponseEntity<AppointmentView>(response, HttpStatus.OK);
+        } catch( Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }*/
 }

@@ -24,8 +24,8 @@ public class AppointmentView {
     @Column(length = 50) @Getter @Setter
     @Schema(example = "Cita acordada con exito", description = "Descripción de la cita")
     private String description;
-    @Column(length = 10) @Getter @Setter
-    @Schema(example = "UPDATED", description = "Estado de la cita")
+    @Column(length = 20) @Getter @Setter
+    @Schema(example = "ACCOMPLISHED", description = "Estado de la cita")
     private String status;
     @Schema(example = "2021-11-19T09:15:52.390Z", description = "Fecha de la creación")
     private Instant createAt;
