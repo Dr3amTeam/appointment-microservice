@@ -1,8 +1,8 @@
 package com.dreamteam.appointmentmicroservice.command.domain;
 
 public enum AppointmentStatus {
-    CREATED,
-    UPDATED,
+    PENDING,
+    ACCOMPLISHED,
     FAILED,
     COMPLETED
 }
